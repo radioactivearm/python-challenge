@@ -85,7 +85,30 @@ def great_inc(date,profit):
 
 # finds the greatest decrease in losses (date and amount)
 # over the entire period
+# return will be in form of dictionary with keys of month and change
+def great_dec(date,loss):
 
+    # These are my place holders for greatset loss values
+    great_date = ''
+    great_change = 0
+
+    # one more time I want a length that is one less then the length that i am puttin in
+    length = len(loss) - 1
+
+    # very similar to above but not quite (different variables and stuff)
+    for i in range(length):
+        this_month = int(loss[i])
+        next_month = int(loss[i+1])
+        change = next_month - this_month
+
+        # again I will use a if statemanet but i will be looking for less then instead
+        if change < great_change:
+            great_date = date[i+1]
+            great_change = change
+
+    # the return again will be in the form of a dictionary. same keys to keep it simple:
+    #  month and change
+    return {'month': great_date, 'change': great_change}
 
 #-----------------------------------------------------------
 # open and read file into a dictionary of lists
@@ -136,6 +159,9 @@ avg_change = changes(finance['Profit/Losses'])
 # use great_inc on dictionary
 greater = great_inc(finance['Date'],finance['Profit/Losses'])
 
+# use great_dec on dictionary
+lesser = great_dec(finance['Date'],finance['Profit/Losses'])
+
 
 #----------------------------------------------------------------------------
 # Print Out A nice summary of findings
@@ -149,3 +175,5 @@ print(f'Total: ${sum_prof}')
 print(f'Average Change: ${avg_change}')
 # printing a formatted string of greatest increase in profits
 print(f'Greatest Increase in Profits: {greater["month"]} (${greater["change"]})')
+# printing a formatted string of greatest decreases in losses
+print(f'Greatest Decreases in Profits: {lesser["month"]} (${lesser["change"]})')

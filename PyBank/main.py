@@ -56,6 +56,36 @@ def changes(profit):
     # returns the average change
     return average_change
             
+# finds the greatest increase in profits (date and amount)
+# over the entire period
+# return in form of dictionary with keys of month and change
+def great_inc(date,profit):
+
+    # These are my intial place holders for greatest values
+    great_date = ''
+    great_change = 0
+
+    # again looking ahead one in my loop
+    length = len(profit) - 1
+
+    # Borrowing the same idea from my changes function above
+    for i in range(length):
+        this_month = int(profit[i])
+        next_month = int(profit[i+1])
+        change = next_month - this_month
+        
+        # now use an if statement to see if this change is greater than the last
+        # and if so, store it in my great_date and great_change variables
+        if change > great_change:
+            great_date = date[i+1]
+            great_change = change
+    
+    # the return is in the form of a dictionary with keys of month and change
+    return {'month': great_date, 'change': great_change}
+
+# finds the greatest decrease in losses (date and amount)
+# over the entire period
+
 
 #-----------------------------------------------------------
 # open and read file into a dictionary of lists
@@ -103,6 +133,9 @@ sum_prof = sum_profit(finance['Profit/Losses'])
 # use changes on dictionary
 avg_change = changes(finance['Profit/Losses'])
 
+# use great_inc on dictionary
+greater = great_inc(finance['Date'],finance['Profit/Losses'])
+
 
 #----------------------------------------------------------------------------
 # Print Out A nice summary of findings
@@ -114,4 +147,5 @@ print(f'Total Months: {tot_mon}')
 print(f'Total: ${sum_prof}')
 # printing a formatted string of average change
 print(f'Average Change: ${avg_change}')
-    
+# printing a formatted string of greatest increase in profits
+print(f'Greatest Increase in Profits: {greater["month"]} (${greater["change"]})')

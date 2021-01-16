@@ -177,3 +177,22 @@ print(f'Average Change: ${avg_change}')
 print(f'Greatest Increase in Profits: {greater["month"]} (${greater["change"]})')
 # printing a formatted string of greatest decreases in losses
 print(f'Greatest Decreases in Profits: {lesser["month"]} (${lesser["change"]})')
+
+
+
+fin_ana = open('analysis/financial_analysis.txt', 'w')
+#----------------------------------------------------------------------------
+# Print Out A nice summary of findings
+fin_ana.write('Financial Analysis\n')
+fin_ana.write('---------------------------------------\n')
+#printing a formating string of total months
+fin_ana.write(f'Total Months: {tot_mon}\n')
+# printing a formated string of total profits
+fin_ana.write(f'Total: ${sum_prof}\n')
+# printing a formatted string of average change
+fin_ana.write(f'Average Change: ${avg_change}\n')
+# printing a formatted string of greatest increase in profits
+fin_ana.write(f'Greatest Increase in Profits: {greater["month"]} (${greater["change"]})\n')
+# printing a formatted string of greatest decreases in losses
+fin_ana.write(f'Greatest Decreases in Profits: {lesser["month"]} (${lesser["change"]})\n')
+fin_ana.close()

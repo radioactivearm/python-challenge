@@ -8,6 +8,7 @@
 import os
 import csv
 
+
 #-----------------------------------------------------------
 # functions
 
@@ -28,7 +29,7 @@ def sum_profit(profit):
 
     # goes thru list and sums the contents
     # (turns them into integers since I can't assume
-    #  that they already are)
+    # that they already are)
     for i in profit:
         total += int(i)
 
@@ -107,8 +108,9 @@ def great_dec(date,loss):
             great_change = change
 
     # the return again will be in the form of a dictionary. same keys to keep it simple:
-    #  month and change
+    # month and change
     return {'month': great_date, 'change': great_change}
+
 
 #-----------------------------------------------------------
 # open and read file into a dictionary of lists
@@ -165,34 +167,50 @@ lesser = great_dec(finance['Date'],finance['Profit/Losses'])
 
 #----------------------------------------------------------------------------
 # Print Out A nice summary of findings
+
 print('Financial Analysis')
 print('----------------------------')
-#printing a formating string of total months
+
+# printing a formating string of total months
 print(f'Total Months: {tot_mon}')
+
 # printing a formated string of total profits
 print(f'Total: ${sum_prof}')
+
 # printing a formatted string of average change
 print(f'Average Change: ${avg_change}')
+
 # printing a formatted string of greatest increase in profits
 print(f'Greatest Increase in Profits: {greater["month"]} (${greater["change"]})')
+
 # printing a formatted string of greatest decreases in losses
 print(f'Greatest Decreases in Profits: {lesser["month"]} (${lesser["change"]})')
 
 
+#-------------------------------------------------------------------------------
+# Writing to a .txt file
 
 fin_ana = open('analysis/financial_analysis.txt', 'w')
 #----------------------------------------------------------------------------
 # Print Out A nice summary of findings
+
 fin_ana.write('Financial Analysis\n')
 fin_ana.write('---------------------------------------\n')
+
 #printing a formating string of total months
 fin_ana.write(f'Total Months: {tot_mon}\n')
+
 # printing a formated string of total profits
 fin_ana.write(f'Total: ${sum_prof}\n')
+
 # printing a formatted string of average change
 fin_ana.write(f'Average Change: ${avg_change}\n')
+
 # printing a formatted string of greatest increase in profits
 fin_ana.write(f'Greatest Increase in Profits: {greater["month"]} (${greater["change"]})\n')
+
 # printing a formatted string of greatest decreases in losses
 fin_ana.write(f'Greatest Decreases in Profits: {lesser["month"]} (${lesser["change"]})\n')
+
+# closing txt file
 fin_ana.close()

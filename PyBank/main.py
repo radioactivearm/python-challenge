@@ -191,9 +191,8 @@ print(f'Greatest Decreases in Profits: {lesser["month"]} (${lesser["change"]})')
 # Writing to a .txt file
 
 fin_ana = open('analysis/financial_analysis.txt', 'w')
-#----------------------------------------------------------------------------
-# Print Out A nice summary of findings
 
+# Start of txt file
 fin_ana.write('Financial Analysis\n')
 fin_ana.write('---------------------------------------\n')
 

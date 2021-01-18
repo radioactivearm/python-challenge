@@ -13,7 +13,7 @@ import csv
 # functions
 
 # find total number of months
-def total_months(date,profit):
+def total_months(date):
 
     # pass in lists
     totals = len(date)
@@ -139,8 +139,8 @@ with open(csvpath) as csvfile:
 
     # read rest of file into lists which will be put into dictonary
     for row in csvreader:
-        finance['Date'].append(row[0])
-        finance['Profit/Losses'].append(row[1])
+        finance[keys[0]].append(row[0])
+        finance[keys[1]].append(row[1])
 
     # print(finance['Date'][-1])
     # print(len(finance['Date']))
@@ -150,19 +150,19 @@ with open(csvpath) as csvfile:
 # use functions on dictionary to find desired values (and save them)
 
 # # use total_months on dictionary
-tot_mon = total_months(finance['Date'],finance['Profit/Losses'])
+tot_mon = total_months(finance[keys[0]])
 
 # # use sum_profit on dictionary
-sum_prof = sum_profit(finance['Profit/Losses'])
+sum_prof = sum_profit(finance[keys[1]])
 
 # use changes on dictionary
-avg_change = changes(finance['Profit/Losses'])
+avg_change = changes(finance[keys[1]])
 
 # use great_inc on dictionary
-greater = great_inc(finance['Date'],finance['Profit/Losses'])
+greater = great_inc(finance[keys[0]],finance[keys[1]])
 
 # use great_dec on dictionary
-lesser = great_dec(finance['Date'],finance['Profit/Losses'])
+lesser = great_dec(finance[keys[0]],finance[keys[1]])
 
 
 #----------------------------------------------------------------------------

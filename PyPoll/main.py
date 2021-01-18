@@ -12,6 +12,13 @@ import csv
 #-----------------------------------------------------
 # functions
 
+# count number of votes
+def count_poll(vote):
+    # i assuming no repeated votes
+    count = len(vote)
+    return count
+
+    
 
 
 
@@ -41,15 +48,15 @@ with open(csvpath) as csvfile:
 
     # read rest of file into dictionary
     for row in csvreader:
-        poll['Voter ID'].append(row[0])
-        poll['County'].append(row[1])
-        poll['Candidate'].append(row[2])
+        poll[keys[0]].append(row[0])
+        poll[keys[1]].append(row[1])
+        poll[keys[2]].append(row[2])
 
-    print(len(poll['County']))
-
-
+    print(len(poll[keys[1]]))
 
 
+
+print(f'Total Votes: {count_poll(poll[keys[0]])}')
 
 
 

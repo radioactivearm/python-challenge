@@ -58,7 +58,32 @@ def totaling_vote(votes,num_of_candi):
     # returns a list that corresponds with candidate list
     return total_votes
 
-    
+
+# calulates percent of votes each candidate got.
+def percent_vote(all_votes,total_votes):
+    percent_wins = (total_votes / all_votes) * 100
+    percent_wins_r = np.round(percent_wins, 3)
+
+    return percent_wins_r
+
+
+# finds and returns wich candidate had the greatest total number of votes cast in their name
+def winner(candidate,total_votes):
+
+    # stores the candidates name who as most votes
+    winner_winner = ''
+    # stores most votes tied to candidate
+    winner_total = 0
+
+    # runs thru all candidates
+    for i in range(len(candidate)):
+        # compares all vote counts
+        if total_votes[i] > winner_total:
+            winner_winner = candidate[i]
+            winner_total = total_votes[i]
+
+    # returns candidate name (string)
+    return winner_winner
 
 
 
@@ -98,14 +123,19 @@ with open(csvpath) as csvfile:
 
 print(f'Total Votes: {count_poll(poll[keys[0]])}')
 
+total_votes = count_poll(poll[keys[0]])
+
 print(candidates(poll[keys[2]]))
 
 list_of_candidates = candidates(poll[keys[2]])
 
 print(totaling_vote(poll[keys[2]],list_of_candidates))
 
+list_of_totals = totaling_vote(poll[keys[2]],list_of_candidates) 
 
+print(percent_vote(total_votes,list_of_totals))
 
+print(winner(list_of_candidates,list_of_totals))
 
 
 

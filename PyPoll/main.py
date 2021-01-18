@@ -54,17 +54,15 @@ def totaling_vote(votes,num_of_candi):
             if vote == candi:
                 # then tally that vote under the candidates slot
                 total_votes[num_of_candi.index(candi)] += 1
-    total_votes_r = np.round(total_votes,0)
     # returns a list that corresponds with candidate list
-    return total_votes_r
+    return total_votes
 
 
 # calulates percent of votes each candidate got.
 def percent_vote(all_votes,total_votes):
     percent_wins = (total_votes / all_votes) * 100
-    percent_wins_r = np.round(percent_wins, 3)
 
-    return percent_wins_r
+    return percent_wins
 
 
 # finds and returns wich candidate had the greatest total number of votes cast in their name
@@ -115,7 +113,7 @@ with open(csvpath) as csvfile:
         poll[keys[1]].append(row[1])
         poll[keys[2]].append(row[2])
 
-    print(len(poll[keys[1]]))
+    # print(len(poll[keys[1]]))
 
 
 # making variable for total votes cast
@@ -151,7 +149,7 @@ print('------------------------------')
 
 # printing main block of text once for each candidate (added two zeros because git is not printing all the zeros)
 for i in range(len(list_of_candidates)):
-    print(f'{list_of_candidates[i]}: {list_of_percents[i]}00% ({list_of_totals[i]})')
+    print(f'{list_of_candidates[i]}: {list_of_percents[i]:.3f}% ({list_of_totals[i]:.0f})')
 
 print('------------------------------')
 

@@ -18,6 +18,24 @@ def count_poll(vote):
     count = len(vote)
     return count
 
+
+# find candidates
+def candidates(candidates):
+    
+    found_candi = []
+
+    # i am thinking that there is something about how list comprehension works that is alluding me here
+    # because this just does not work
+    # found_candi = [candidates.pop() for candi in candidates if candi not in found_candi]
+
+    # finds all unique candidates
+    for candi in candidates:
+        # if they are not already in list of unique candidates, this will add them
+        if candi not in found_candi:
+            found_candi.append(candi)
+    
+    # returns list of candidates
+    return found_candi
     
 
 
@@ -57,6 +75,8 @@ with open(csvpath) as csvfile:
 
 
 print(f'Total Votes: {count_poll(poll[keys[0]])}')
+
+print(candidates(poll[keys[2]]))
 
 
 

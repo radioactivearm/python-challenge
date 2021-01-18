@@ -54,9 +54,9 @@ def totaling_vote(votes,num_of_candi):
             if vote == candi:
                 # then tally that vote under the candidates slot
                 total_votes[num_of_candi.index(candi)] += 1
-
+    total_votes_r = np.round(total_votes,0)
     # returns a list that corresponds with candidate list
-    return total_votes
+    return total_votes_r
 
 
 # calulates percent of votes each candidate got.
@@ -84,8 +84,6 @@ def winner(candidate,total_votes):
 
     # returns candidate name (string)
     return winner_winner
-
-
 
 #--------------------------------------------------
 # open and read csv file into a dictionary of lists
@@ -120,22 +118,48 @@ with open(csvpath) as csvfile:
     print(len(poll[keys[1]]))
 
 
-
-print(f'Total Votes: {count_poll(poll[keys[0]])}')
-
+# making variable for total votes cast
+# print(f'Total Votes: {count_poll(poll[keys[0]])}')
 total_votes = count_poll(poll[keys[0]])
 
-print(candidates(poll[keys[2]]))
-
+# making list of all candidates
+# print(candidates(poll[keys[2]]))
 list_of_candidates = candidates(poll[keys[2]])
 
-print(totaling_vote(poll[keys[2]],list_of_candidates))
-
+# making list of total votes for each candidates
+# print(totaling_vote(poll[keys[2]],list_of_candidates))
 list_of_totals = totaling_vote(poll[keys[2]],list_of_candidates) 
 
-print(percent_vote(total_votes,list_of_totals))
+# making list of percentage of total votes each candidate got
+# print(percent_vote(total_votes,list_of_totals))
+list_of_percents = percent_vote(total_votes,list_of_totals)
 
-print(winner(list_of_candidates,list_of_totals))
+# which candadate won
+# print(winner(list_of_candidates,list_of_totals))
+winner_of_poll = winner(list_of_candidates,list_of_totals)
+
+
+#----------------------------------------------------------------------------------
+# Printing results
+
+print('Election Results')
+print('------------------------------')
+
+# printing total votes
+print(f'Total Votes: {count_poll(poll[keys[0]])}')
+print('------------------------------')
+
+# printing main block of text once for each candidate (added two zeros because git is not printing all the zeros)
+for i in range(len(list_of_candidates)):
+    print(f'{list_of_candidates[i]}: {list_of_percents[i]}00% ({list_of_totals[i]})')
+
+print('------------------------------')
+
+# prints winner of whole thing
+print(f'Winner: {winner_of_poll}')
+print('------------------------------')
+
+
 
 
 

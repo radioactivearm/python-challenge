@@ -7,6 +7,7 @@
 # import modules
 import os
 import csv
+import numpy as np
 
 
 #-----------------------------------------------------
@@ -20,10 +21,11 @@ def count_poll(vote):
 
 
 # find candidates
+# building on this one, making it find number of votes as it finds candidates
 def candidates(candidates):
     
-    found_candi = []
-
+    runner = []
+    
     # i am thinking that there is something about how list comprehension works that is alluding me here
     # because this just does not work
     # found_candi = [candidates.pop() for candi in candidates if candi not in found_candi]
@@ -31,11 +33,31 @@ def candidates(candidates):
     # finds all unique candidates
     for candi in candidates:
         # if they are not already in list of unique candidates, this will add them
-        if candi not in found_candi:
-            found_candi.append(candi)
-    
+        if candi not in runner:
+            runner.append(candi)
+
+
     # returns list of candidates
-    return found_candi
+    return runner
+
+# this function is going to calculate total
+def totaling_vote(votes,num_of_candi):
+
+    # creating a list of zeros equal to length of candidates; imported numpy for this :)
+    total_votes = np.zeros(len(num_of_candi))
+
+    #loop thru all votes casted
+    for vote in votes:
+        # loop thru all candidates
+        for candi in num_of_candi:
+            # and check which candidate the vote was cast for
+            if vote == candi:
+                # then tally that vote under the candidates slot
+                total_votes[num_of_candi.index(candi)] += 1
+
+    # returns a list that corresponds with candidate list
+    return total_votes
+
     
 
 
@@ -77,6 +99,11 @@ with open(csvpath) as csvfile:
 print(f'Total Votes: {count_poll(poll[keys[0]])}')
 
 print(candidates(poll[keys[2]]))
+
+list_of_candidates = candidates(poll[keys[2]])
+
+print(totaling_vote(poll[keys[2]],list_of_candidates))
+
 
 
 

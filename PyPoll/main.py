@@ -161,3 +161,13 @@ print(poll_summary_1)
 print(poll_summary_2)
 
 
+#----------------------------------------------------------------
+# write to txt file poll_summary
+polling = open('analysis/poll_summary.txt', 'w')
+polling.write(poll_summary_1)
+polling.write('\n')
+[polling.write(f'{list_of_candidates[i]}: {list_of_percents[i]:.3f}% ({list_of_totals[i]:.0f})\n') for i in range(len(list_of_candidates))]
+polling.write(poll_summary_2)
+polling.close()
+
+

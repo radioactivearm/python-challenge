@@ -145,7 +145,6 @@ with open(csvpath) as csvfile:
     # print(finance['Date'][-1])
     # print(len(finance['Date']))
 
-
 #----------------------------------------------------------------------
 # use functions on dictionary to find desired values (and save them)
 
@@ -164,52 +163,29 @@ greater = great_inc(finance[keys[0]],finance[keys[1]])
 # use great_dec on dictionary
 lesser = great_dec(finance[keys[0]],finance[keys[1]])
 
+# -----------------------------------------------------------------------------------------
+# trying a new way to print and write to txt that is simpiler that Dom and Luis mentioned on slack
 
-#----------------------------------------------------------------------------
-# Print Out A nice summary of findings
-
-print('Financial Analysis')
-print('----------------------------')
-
-# printing a formating string of total months
-print(f'Total Months: {tot_mon}')
-
-# printing a formated string of total profits
-print(f'Total: ${sum_prof}')
-
-# printing a formatted string of average change
-print(f'Average Change: ${avg_change}')
-
-# printing a formatted string of greatest increase in profits
-print(f'Greatest Increase in Profits: {greater["month"]} (${greater["change"]})')
-
-# printing a formatted string of greatest decreases in losses
-print(f'Greatest Decreases in Profits: {lesser["month"]} (${lesser["change"]})')
+# not quite sure why it will not let me indent these lines to make it more readable
+summary = (
+            f'Financial Analysis\n'
+            f'---------------------------------------\n'
+            f'Total Months: {tot_mon}\n'
+            f'Total: ${sum_prof}\n'
+            f'Average Change: ${avg_change}\n'
+            f'Greatest Increase in Profits: {greater["month"]} (${greater["change"]})\n'
+            f'Greatest Decrease in Profits: {lesser["month"]} (${lesser["change"]})'
+            )
 
 
-#-------------------------------------------------------------------------------
-# Writing to a .txt file
+#----------------------------------------------------------------------------------
 
+# print summary of financial analysis
+print(summary)
+
+#---------------------------------------------------------------
+
+# Write to txt file financial analysis
 fin_ana = open('analysis/financial_analysis.txt', 'w')
-
-# Start of txt file
-fin_ana.write('Financial Analysis\n')
-fin_ana.write('---------------------------------------\n')
-
-#printing a formating string of total months
-fin_ana.write(f'Total Months: {tot_mon}\n')
-
-# printing a formated string of total profits
-fin_ana.write(f'Total: ${sum_prof}\n')
-
-# printing a formatted string of average change
-fin_ana.write(f'Average Change: ${avg_change}\n')
-
-# printing a formatted string of greatest increase in profits
-fin_ana.write(f'Greatest Increase in Profits: {greater["month"]} (${greater["change"]})\n')
-
-# printing a formatted string of greatest decreases in losses
-fin_ana.write(f'Greatest Decreases in Profits: {lesser["month"]} (${lesser["change"]})\n')
-
-# closing txt file
+fin_ana.write(summary)
 fin_ana.close()

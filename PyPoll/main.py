@@ -136,29 +136,28 @@ list_of_percents = percent_vote(total_votes,list_of_totals)
 # print(winner(list_of_candidates,list_of_totals))
 winner_of_poll = winner(list_of_candidates,list_of_totals)
 
+#---------------------------------------------------------------------------------
+# making a formatted string of for printing and writing
 
-#----------------------------------------------------------------------------------
-# Printing results
+#breaking in two so i can run a list comprehension in the middle
+poll_summary_1 = (
+    f'Election Results\n'
+    f'------------------------------\n'
+    f'Total Votes: {count_poll(poll[keys[0]])}\n'
+    f'------------------------------'
+)
 
-print('Election Results')
-print('------------------------------')
+poll_summary_2 = (
+    f'------------------------------\n'
+    f'Winner: {winner_of_poll}\n'
+    f'------------------------------'
+)
 
-# printing total votes
-print(f'Total Votes: {count_poll(poll[keys[0]])}')
-print('------------------------------')
+#---------------------------------------------------------------
+# print
 
-# printing main block of text once for each candidate (added two zeros because git is not printing all the zeros)
-for i in range(len(list_of_candidates)):
-    print(f'{list_of_candidates[i]}: {list_of_percents[i]:.3f}% ({list_of_totals[i]:.0f})')
-
-print('------------------------------')
-
-# prints winner of whole thing
-print(f'Winner: {winner_of_poll}')
-print('------------------------------')
-
-
-
-
+print(poll_summary_1)
+[print(f'{list_of_candidates[i]}: {list_of_percents[i]:.3f}% ({list_of_totals[i]:.0f})') for i in range(len(list_of_candidates))]
+print(poll_summary_2)
 
 

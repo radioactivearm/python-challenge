@@ -11,12 +11,6 @@ import csv
 #-----------------------------------------------------
 # functions
 
-# count number of votes
-def count_poll(vote):
-    # i assuming no repeated votes
-    count = len(vote)
-    return count
-
 # find candidates
 # building on this one, making it find number of votes as it finds candidates
 def candidates(candidates):
@@ -25,33 +19,42 @@ def candidates(candidates):
 
     # finds all unique candidates
     for candi in candidates:
-        # if they are not already in list of unique candidates, this will add them
+        # if they are not already a key, this will add them(as a key to themselves)
         if candi not in runner:
             runner[candi] = candi
 
-    # returns list of candidates
+    # returns dictionary of candidates
     return runner
 
 # this function is going to calculate total returns a dictionary
 def totaling_vote(votes):
 
+    #create an empty dictionary to be filled with keys of candidates and values
+    #  of how many votes they got
     dict_of_candi = {}
 
+    # runs thru all votes
     for vote in votes:
+        #if candidate not a key, they are added and vote count is set at 1
         if vote not in dict_of_candi:
             dict_of_candi[vote] = 1
+        # if they are a key, their count is incremeted by 1
         else:
             dict_of_candi[vote] += 1
-
+    
+    # returns a dictionary
     return dict_of_candi
 
-# calulates percent of votes each candidate got returns dictionary
+# calulates percent of votes each candidate got returns a dictionary
 def percent_vote(all_votes,total_votes):
 
     percent_wins = {}
+
+    # go over all candidates total vote count and calculate percent vote
     for vote in total_votes:
         percent_wins[vote] = (int(total_votes[vote]) / int(all_votes)) * 100 
 
+    # returns dictionary
     return percent_wins
 
 # finds and returns wich candidate had the greatest total number of votes cast in their name
@@ -101,21 +104,19 @@ with open(csvpath) as csvfile:
         poll[keys[1]].append(row[1])
         poll[keys[2]].append(row[2])
 
-    # print(len(poll[keys[1]]))
-
 #---------------------------------------------------------
-# using functions
+# using calculation figures, using functions and assigning them to variables
 
-# making variable for total votes cast
-total_votes = count_poll(poll[keys[0]])
+# calculating total votes
+total_votes = len(poll[keys[0]])
 
-# making list of all candidates
+# making dictionary of all candidates
 dict_of_candidates = candidates(poll[keys[2]])
 
-# making list of total votes for each candidates
+# making dictionary of total votes for each candidates
 dict_of_totals = totaling_vote(poll[keys[2]]) 
 
-# making list of percentage of total votes each candidate got
+# making dictionary of percentage of total votes each candidate got
 dict_of_percents = percent_vote(total_votes,dict_of_totals)
 
 # which candadate won
@@ -128,7 +129,7 @@ winner_of_poll = winner(dict_of_candidates,dict_of_totals)
 poll_summary_1 = (
     f'Election Results\n'
     f'------------------------------\n'
-    f'Total Votes: {count_poll(poll[keys[0]])}\n'
+    f'Total Votes: {total_votes}\n'
     f'------------------------------'
 )
 
@@ -147,6 +148,7 @@ print(poll_summary_2)
 
 #----------------------------------------------------------------
 # write to txt file poll_summary
+
 polling = open('analysis/poll_summary.txt', 'w')
 polling.write(poll_summary_1)
 polling.write('\n')

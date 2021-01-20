@@ -8,18 +8,8 @@
 import os
 import csv
 
-
 #-----------------------------------------------------------
 # functions
-
-# find total number of months
-def total_months(date):
-
-    # pass in lists
-    totals = len(date)
-    
-    # returns to total
-    return totals
 
 # Sums the profit/losses
 def sum_profit(profit):
@@ -135,23 +125,19 @@ with open(csvpath) as csvfile:
     finance = {}
     finance[keys[0]] = []
     finance[keys[1]] = []
-    # print(finance)
 
     # read rest of file into lists which will be put into dictonary
     for row in csvreader:
         finance[keys[0]].append(row[0])
         finance[keys[1]].append(row[1])
 
-    # print(finance['Date'][-1])
-    # print(len(finance['Date']))
-
 #----------------------------------------------------------------------
 # use functions on dictionary to find desired values (and save them)
 
-# # use total_months on dictionary
-tot_mon = total_months(finance[keys[0]])
+# find total months
+tot_mon = len(finance[keys[0]])
 
-# # use sum_profit on dictionary
+# use sum_profit on dictionary
 sum_prof = sum_profit(finance[keys[1]])
 
 # use changes on dictionary
@@ -165,8 +151,6 @@ lesser = great_dec(finance[keys[0]],finance[keys[1]])
 
 # -----------------------------------------------------------------------------------------
 # trying a new way to print and write to txt that is simpiler that Dom and Luis mentioned on slack
-
-# not quite sure why it will not let me indent these lines to make it more readable
 summary = (
             f'Financial Analysis\n'
             f'---------------------------------------\n'
@@ -179,12 +163,10 @@ summary = (
 
 
 #----------------------------------------------------------------------------------
-
 # print summary of financial analysis
 print(summary)
 
 #---------------------------------------------------------------
-
 # Write to txt file financial analysis
 fin_ana = open('analysis/financial_analysis.txt', 'w')
 fin_ana.write(summary)

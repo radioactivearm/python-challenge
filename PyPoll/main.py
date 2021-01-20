@@ -7,8 +7,6 @@
 # import modules
 import os
 import csv
-import numpy as np
-
 
 #-----------------------------------------------------
 # functions
@@ -19,16 +17,11 @@ def count_poll(vote):
     count = len(vote)
     return count
 
-
 # find candidates
 # building on this one, making it find number of votes as it finds candidates
 def candidates(candidates):
     
     runner = {}
-    
-    # i am thinking that there is something about how list comprehension works that is alluding me here
-    # because this just does not work
-    # found_candi = [candidates.pop() for candi in candidates if candi not in found_candi]
 
     # finds all unique candidates
     for candi in candidates:
@@ -51,20 +44,6 @@ def totaling_vote(votes):
             dict_of_candi[vote] += 1
 
     return dict_of_candi
-    # # creating a list of zeros equal to length of candidates; imported numpy for this :)
-    # total_votes = np.zeros(len(num_of_candi))
-
-    # #loop thru all votes casted
-    # for vote in votes:
-    #     # loop thru all candidates
-    #     for candi in num_of_candi:
-    #         # and check which candidate the vote was cast for
-    #         if vote == candi:
-    #             # then tally that vote under the candidates slot
-    #             total_votes[num_of_candi.index(candi)] += 1
-    # # returns a list that corresponds with candidate list
-    # return total_votes
-
 
 # calulates percent of votes each candidate got returns dictionary
 def percent_vote(all_votes,total_votes):
@@ -73,10 +52,7 @@ def percent_vote(all_votes,total_votes):
     for vote in total_votes:
         percent_wins[vote] = (int(total_votes[vote]) / int(all_votes)) * 100 
 
-    # percent_wins = (total_votes / all_votes) * 100
-
     return percent_wins
-
 
 # finds and returns wich candidate had the greatest total number of votes cast in their name
 def winner(candidate,total_votes):
@@ -91,13 +67,6 @@ def winner(candidate,total_votes):
         if total_votes[vote] > winner_total:
             winner_winner = vote
             winner_total = total_votes[vote]
-
-    # # runs thru all candidates
-    # for i in range(len(candidate)):
-    #     # compares all vote counts
-    #     if total_votes[i] > winner_total:
-    #         winner_winner = candidate[i]
-    #         winner_total = total_votes[i]
 
     # returns candidate name (string)
     return winner_winner
@@ -134,6 +103,8 @@ with open(csvpath) as csvfile:
 
     # print(len(poll[keys[1]]))
 
+#---------------------------------------------------------
+# using functions
 
 # making variable for total votes cast
 total_votes = count_poll(poll[keys[0]])
@@ -174,7 +145,6 @@ print(poll_summary_1)
 [print(f'{dict_of_candidates[candi]}: {dict_of_percents[candi]:.3f}% ({dict_of_totals[candi]:.0f})') for candi in dict_of_candidates]
 print(poll_summary_2)
 
-
 #----------------------------------------------------------------
 # write to txt file poll_summary
 polling = open('analysis/poll_summary.txt', 'w')
@@ -183,5 +153,3 @@ polling.write('\n')
 [polling.write(f'{dict_of_candidates[candi]}: {dict_of_percents[candi]:.3f}% ({dict_of_totals[candi]:.0f})\n') for candi in dict_of_candidates]
 polling.write(poll_summary_2)
 polling.close()
-
-

@@ -83,7 +83,7 @@ def great_dec(date,loss):
     great_date = ''
     great_change = 0
 
-    # one more time I want a length that is one less then the length that i am puttin in
+    # one more time I want a length that is one less then the length that i am putting in
     length = len(loss) - 1
 
     # very similar to above but not quite (different variables and stuff)

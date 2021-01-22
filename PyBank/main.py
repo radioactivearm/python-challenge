@@ -168,6 +168,7 @@ print(summary)
 
 #---------------------------------------------------------------
 # Write to txt file financial analysis
-fin_ana = open('analysis/financial_analysis.txt', 'w')
+txtpath = os.path.join('analysis','financial_analysis.txt')
+fin_ana = open(txtpath, 'w')
 fin_ana.write(summary)
 fin_ana.close()

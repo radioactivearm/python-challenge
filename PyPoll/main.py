@@ -148,8 +148,8 @@ print(poll_summary_2)
 
 #----------------------------------------------------------------
 # write to txt file poll_summary
-
-polling = open('analysis/poll_summary.txt', 'w')
+txtpath = os.path.join('analysis','poll_summary.txt')
+polling = open(txtpath, 'w')
 polling.write(poll_summary_1)
 polling.write('\n')
 [polling.write(f'{dict_of_candidates[candi]}: {dict_of_percents[candi]:.3f}% ({dict_of_totals[candi]:.0f})\n') for candi in dict_of_candidates]
